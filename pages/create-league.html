@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create League - Fantasy Football League</title>
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="background-container">
+        <div class="tiled-background"></div>
+        <div class="overlay"></div>
+    </div>
+    
+    <header class="main-header">
+        <div class="navigation-top">
+            <h1 class="page-title">CREATE LEAGUE</h1>
+            <div class="league-title">THE SOCK TAN COLLECTIVE FFL</div>
+            <div class="user-status">
+                <!-- User status will be populated by JavaScript -->
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <div class="create-league-container">
+            <div class="auth-card">
+                <h2>Create a New League</h2>
+                <div id="error-message" class="error-message"></div>
+                
+                <form id="league-form" class="auth-form">
+                    <div class="tabs-navigation">
+                        <button type="button" class="nav-tab active" data-tab="basic">Basic</button>
+                        <button type="button" class="nav-tab" data-tab="roster">Roster</button>
+                        <button type="button" class="nav-tab" data-tab="scoring">Scoring</button>
+                        <button type="button" class="nav-tab" data-tab="rules">Rules</button>
+                    </div>
+                    
+                    <div class="tab-content" id="basic-tab">
+                        <div class="form-group">
+                            <label for="league-name">League Name</label>
+                            <input type="text" id="league-name" name="league-name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="league-description">Description</label>
+                            <textarea id="league-description" name="league-description" rows="3"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="league-type">League Type</label>
+                            <select id="league-type" name="league-type">
+                                <option value="redraft" selected>Redraft</option>
+                                <option value="keeper">Keeper</option>
+                                <option value="dynasty">Dynasty</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group" id="keeper-settings" style="display: none;">
+                            <label for="keeper-count">Number of Keepers</label>
+                            <input type="number" id="keeper-count" name="keeper-count" min="0" max="20" value="2">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="max-teams">Max Teams</label>
+                            <select id="max-teams" name="max-teams">
+                                <option value="8">8 Teams</option>
+                                <option value="10">10 Teams</option>
+                                <option value="12" selected>12 Teams</option>
+                                <option value="14">14 Teams</option>
+                                <option value="16">16 Teams</option>
+                                <option value="20">20 Teams</option>
+                                <option value="24">24 Teams</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="draft-type">Draft Type</label>
+                            <select id="draft-type" name="draft-type">
+                                <option value="snake" selected>Snake</option>
+                                <option value="auction">Auction</option>
+                                <option value="linear">Linear</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="draft-date">Draft Date & Time</label>
+                            <input type="datetime-local" id="draft-date" name="draft-date">
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="roster-tab" style="display: none;">
+                        <div class="form-group">
+                            <label for="scoring-type">Scoring Model</label>
+                            <select id="scoring-type" name="scoring-type">
+                                <option value="standard">Standard</option>
+                                <option value="ppr">PPR</option>
+                                <option value="half_ppr" selected>Half PPR</option>
+                                <option value="te_premium">TE Premium</option>
+                                <option value="idp">IDP (Individual Defensive Players)</option>
+                                <option value="superflex">Superflex</option>
+                                <option value="ppfd">PPFD (Points Per First Down)</option>
+                                <option value="best_ball">Best Ball</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <h3>Starting Lineup</h3>
+                            <div class="roster-settings">
+                                <div class="position-setting">
+                                    <label for="pos-qb">Quarterbacks (QB)</label>
+                                    <input type="number" id="pos-qb" name="pos-qb" min="0" max="2" value="1">
+                                </div>
+                                
+                                <div class="position-setting">
+                                    <label for="pos-tqb">Team Quarterbacks (TQB)</label>
+                                    <input type="number" id="pos-tqb" name="pos-tqb" min="0" max="1" value="0">
+                                </div>
+                                
+                                <div class="position-setting">
+                                    <label for="pos-rb">Running Backs (RB)</label>
+                                    <input type="number" id="pos-rb" name="pos-rb" min="0" max="3" value="2">
+                                </div>
+                                
+                                <div class="position-setting">
+                                    <label for="pos-wr">Wide Receivers (WR)</label>
+                                    <input type="number" id="pos-wr" name="pos-wr" min="0" max="4" value="2">
+                                </div>
+                                
+                                <div class="position-setting">
+                                    <label for="pos-te">Tight Ends (TE)</label>
+                                    <input type="number" id="pos-te" name="pos-te" min="0" max="2" value="1">
+                                </div>
+                                
+                                <div class="position-setting">
+                                    <label for="pos-flex">FLEX (RB/WR/TE)</label>
+                                    <input type="number" id="pos-flex" name="pos-flex" min="0" max="3" value="1">
+                                </div>
+                                
+                                <div class="position-setting">
+                                    <label for="pos-rbwr">RB/WR</label>
+                                    <input type="number" id="pos-rbwr" name="pos-rbwr" min="0" max="2" value="0">
+                                </div>
+                                
+                                <div class="position-setting">
+                                    <label for="pos-wrte">WR/TE</label>
+                                    <input type="number" id="pos-wrte" name="pos-wrte" min="0" max="2" value="0">
+                                </div>
+                                
+                                <div class="position-setting">
+                                    <label for="pos-op">Offensive Player (OP)</label>
+                                    <input type="number" id="pos-op" name="pos-op" min="0" max="1" value="0">
+                                </div>
+                                
+                                <div class="position-setting">
+                                    <label for="pos-superflex">SUPERFLEX (QB/RB/WR/TE)</label>
+                                    <input type="number" id="pos-superflex" name="pos-superflex" min="0" max="1" value="0">
+                                </div>
+                                
+                                <div class="position-setting">
+                                    <label for="pos-k">Kickers (K)</label>
+                                    <input type="number" id="pos-k" name="pos-k" min="0" max="1" value="1">
+                                </div>
+                                
+                                <div class="position-setting">
+                                    <label for="pos-p">Punters (P)</label>
+                                    <input type="number" id="pos-p" name="pos-p" min="0" max="1" value="0">
+                                </div>
+                                
+                                <div class="position-setting">
+                                    <label for="pos-def">Defense/Special Teams (D/ST)</label>
+                                    <input type="number" id="pos-def" name="pos-def" min="0" max="1" value="1">
+                                </div>
+                                
+                                <div class="position-setting">
+                                    <label for="pos-hc">Head Coach (HC)</label>
+                                    <input type="number" id="pos-hc" name="pos-hc" min="0" max="1" value="0">
+                                </div>
+                            </div>
+                            
+                            <h3>IDP Settings (Individual Defensive Players)</h3>
+                            
+                            <div class="roster-settings">
+                                <div class="position-setting">
+                                    <label for="pos-dt">Defensive Tackles (DT)</label>
+                                    <input type="number" id="pos-dt" name="pos-dt" min="0" max="2" value="0">
+                                </div>
+                                
+                                <div class="position-setting">
+                                    <label for="pos-de">Defensive Ends (DE)</label>
+                                    <input type="number" id="pos-de" name="pos-de" min="0" max="2" value="0">
+                                </div>
+                                
+                                <div class="position-setting">
+                                    <label for="pos-lb">Linebackers (LB)</label>
+                                    <input type="number" id="pos-lb" name="pos-lb" min="0" max="3" value="0">
+                                </div>
+                                
+                                <div class="position-setting">
+                                    <label for="pos-cb">Cornerbacks (CB)</label>
+                                    <input type="number" id="pos-cb" name="pos-cb" min="0" max="2" value="0">
+                                </div>
+                                
+                                <div class="position-setting">
+                                    <label for="pos-s">Safeties (S)</label>
+                                    <input type="number" id="pos-s" name="pos-s" min="0" max="2" value="0">
+                                </div>
+                                
+                                <div class="position-setting">
+                                    <label for="pos-dl">Defensive Line (DL)</label>
+                                    <input type="number" id="pos-dl" name="pos-dl" min="0" max="2" value="0">
+                                </div>
+                                
+                                <div class="position-setting">
+                                    <label for="pos-db">Defensive Backs (DB)</label>
+                                    <input type="number" id="pos-db" name="pos-db" min="0" max="2" value="0">
+                                </div>
+                                
+                                <div class="position-setting">
+                                    <label for="pos-dp">Defensive Player Utility (DP)</label>
+                                    <input type="number" id="pos-dp" name="pos-dp" min="0" max="2" value="0">
+                                </div>
+                            </div>
+                            
+                            <h3>Bench Slots</h3>
+                            
+                            <div class="position-setting">
+                                <label for="pos-bench">Number of Bench Spots (BE)</label>
+                                <input type="number" id="pos-bench" name="pos-bench" min="0" max="15" value="7">
+                            </div>
+                            
+                            <div class="position-setting">
+                                <label for="pos-ir">Injured Reserve Spots (IR)</label>
+                                <input type="number" id="pos-ir" name="pos-ir" min="0" max="5" value="1">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="scoring-tab" style="display: none;">
+                        <div class="form-group">
+                            <p>Basic scoring settings will be applied based on your chosen scoring model. You can customize detailed scoring after league creation.</p>
+                        </div>
+                        
+                        <div class="form-group te-premium-setting" style="display: none;">
+                            <label for="te-premium-bonus">TE Premium Bonus (PPR)</label>
+                            <input type="number" id="te-premium-bonus" name="te-premium-bonus" min="0" max="2" step="0.5" value="0.5">
+                        </div>
+                        
+                        <div class="form-group">
+                            <h3>Passing</h3>
+                            <div class="scoring-settings">
+                                <div class="scoring-item">
+                                    <label for="passing-yards">Yards (per 25)</label>
+                                    <input type="number" id="passing-yards" name="passing-yards" step="0.1" value="1">
+                                </div>
+                                <div class="scoring-item">
+                                    <label for="passing-td">TD</label>
+                                    <input type="number" id="passing-td" name="passing-td" step="0.5" value="4">
+                                </div>
+                                <div class="scoring-item">
+                                    <label for="passing-int">Interception</label>
+                                    <input type="number" id="passing-int" name="passing-int" step="0.5" value="-2">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <h3>Rushing</h3>
+                            <div class="scoring-settings">
+                                <div class="scoring-item">
+                                    <label for="rushing-yards">Yards (per 10)</label>
+                                    <input type="number" id="rushing-yards" name="rushing-yards" step="0.1" value="1">
+                                </div>
+                                <div class="scoring-item">
+                                    <label for="rushing-td">TD</label>
+                                    <input type="number" id="rushing-td" name="rushing-td" step="0.5" value="6">
+                                </div>
+                                <div class="scoring-item ppfd-setting" style="display: none;">
+                                    <label for="rushing-fd">First Down</label>
+                                    <input type="number" id="rushing-fd" name="rushing-fd" step="0.1" value="0.5">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <h3>Receiving</h3>
+                            <div class="scoring-settings">
+                                <div class="scoring-item">
+                                    <label for="receiving-yards">Yards (per 10)</label>
+                                    <input type="number" id="receiving-yards" name="receiving-yards" step="0.1" value="1">
+                                </div>
+                                <div class="scoring-item">
+                                    <label for="receiving-td">TD</label>
+                                    <input type="number" id="receiving-td" name="receiving-td" step="0.5" value="6">
+                                </div>
+                                <div class="scoring-item">
+                                    <label for="reception">Reception</label>
+                                    <input type="number" id="reception" name="reception" step="0.5" value="0.5">
+                                </div>
+                                <div class="scoring-item ppfd-setting" style="display: none;">
+                                    <label for="receiving-fd">First Down</label>
+                                    <input type="number" id="receiving-fd" name="receiving-fd" step="0.1" value="0.5">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="rules-tab" style="display: none;">
+                        <div class="form-group">
+                            <h3>Playoff Settings</h3>
+                            <div class="rule-group">
+                                <label for="playoff-teams">Playoff Teams</label>
+                                <select id="playoff-teams" name="playoff-teams">
+                                    <option value="4">4 Teams</option>
+                                    <option value="6" selected>6 Teams</option>
+                                    <option value="8">8 Teams</option>
+                                </select>
+                            </div>
+                            <div class="rule-group">
+                                <label for="playoff-start-week">Playoff Start Week</label>
+                                <select id="playoff-start-week" name="playoff-start-week">
+                                    <option value="13">Week 13</option>
+                                    <option value="14" selected>Week 14</option>
+                                    <option value="15">Week 15</option>
+                                    <option value="16">Week 16</option>
+                                </select>
+                            </div>
+                            <div class="rule-group">
+                                <label for="playoff-reseeding">Playoff Reseeding</label>
+                                <input type="checkbox" id="playoff-reseeding" name="playoff-reseeding">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <h3>Waiver Settings</h3>
+                            <div class="rule-group">
+                                <label for="waiver-type">Waiver Type</label>
+                                <select id="waiver-type" name="waiver-type">
+                                    <option value="standard" selected>Standard</option>
+                                    <option value="faab">FAAB</option>
+                                    <option value="rolling">Rolling</option>
+                                </select>
+                            </div>
+                            <div class="rule-group faab-setting" style="display: none;">
+                                <label for="faab-budget">FAAB Budget</label>
+                                <input type="number" id="faab-budget" name="faab-budget" min="0" value="100">
+                            </div>
+                            <div class="rule-group">
+                                <label for="waiver-period">Waiver Period (days)</label>
+                                <input type="number" id="waiver-period" name="waiver-period" min="1" max="7" value="2">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <h3>Trade Settings</h3>
+                            <div class="rule-group">
+                                <label for="trade-deadline">Trade Deadline (week)</label>
+                                <select id="trade-deadline" name="trade-deadline">
+                                    <option value="10">Week 10</option>
+                                    <option value="11">Week 11</option>
+                                    <option value="12" selected>Week 12</option>
+                                    <option value="13">Week 13</option>
+                                </select>
+                            </div>
+                            <div class="rule-group">
+                                <label for="trade-review-hours">Trade Review Period (hours)</label>
+                                <input type="number" id="trade-review-hours" name="trade-review-hours" min="0" max="72" value="24">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <h3>Special Rules</h3>
+                            <div class="rule-group">
+                                <label for="injury-substitution">Allow Injury Substitutions</label>
+                                <input type="checkbox" id="injury-substitution" name="injury-substitution">
+                                <span class="rule-description">Allows managers to substitute players injured in-game by game's end.</span>
+                            </div>
+                            <div class="rule-group" id="best-ball-setting">
+                                <label for="best-ball-enabled">Best Ball Format</label>
+                                <input type="checkbox" id="best-ball-enabled" name="best-ball-enabled">
+                                <span class="rule-description">Automatically starts your best possible lineup each week.</span>
+                            </div>
+                            <div class="rule-group">
+                                <label for="bench-lock">Lock Bench Players</label>
+                                <input type="checkbox" id="bench-lock" name="bench-lock">
+                                <span class="rule-description">Bench players are locked once their game starts.</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" id="prev-btn" class="btn btn-secondary" style="display: none;">Previous</button>
+                        <button type="button" id="next-btn" class="btn btn-primary">Next</button>
+                        <button type="submit" id="create-btn" class="btn btn-success" style="display: none;">Create League</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="main-footer">
+        <nav class="main-nav">
+            <a href="../index.html" class="nav-item"><span>Home</span></a>
+            <a href="draft-board.html" class="nav-item restricted"><span>Draft</span></a>
+            <a href="coming-soon.html?feature=standings" class="nav-item restricted"><span>Standings</span></a>
+            <a href="franchise.html" class="nav-item restricted"><span>Franchise</span></a>
+            <a href="season.html" class="nav-item restricted"><span>Season</span></a>
+            <a href="game-search.html" class="nav-item restricted"><span>Games</span></a>
+            <a href="player-search.html" class="nav-item restricted"><span>Players</span></a>
+            <a href="nfl-game-search.html" class="nav-item restricted"><span>NFL Games</span></a>
+            <a href="advanced-analytics.html" class="nav-item restricted"><span>Analytics</span></a>
+            <a href="recordbook.html" class="nav-item restricted"><span>Records</span></a>
+        </nav>
+    </footer>
+    
+    <script src="../js/league-creation.js"></script>
+</body>
+</html>

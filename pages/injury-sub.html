@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Injury Substitution - Fantasy Football League</title>
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="background-container">
+        <div class="tiled-background"></div>
+        <div class="overlay"></div>
+    </div>
+    
+    <header class="main-header">
+        <div class="navigation-top">
+            <div class="header-left">
+                <a href="javascript:history.back()" class="back-button">
+                    <i class="fas fa-arrow-left"></i> Back
+                </a>
+                <h1 class="page-title">INJURY SUBSTITUTION</h1>
+            </div>
+            <div class="league-title">THE SOCK TAN COLLECTIVE FFL</div>
+            <div class="user-status">
+                <!-- User status will be populated by JavaScript -->
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <div class="injury-sub-container">
+            <h2 id="team-name">Loading team...</h2>
+            <p class="instruction">Use this form to request an injury substitution during a game. This will replace an injured player with a bench player.</p>
+            
+            <div id="error-message" class="error-message"></div>
+            <div id="success-message" class="success-message"></div>
+            
+            <form id="injury-sub-form" class="auth-form">
+                <div class="player-selection">
+                    <div class="form-group">
+                        <label for="injured-player">Injured Player</label>
+                        <select id="injured-player" name="injured-player" required>
+                            <option value="">Select injured player...</option>
+                            <!-- Options will be filled by JavaScript -->
+                        </select>
+                    </div>
+                    
+                    <div class="swap-icon">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="substitute-player">Substitute Player</label>
+                        <select id="substitute-player" name="substitute-player" required>
+                            <option value="">Select substitute player...</option>
+                            <!-- Options will be filled by JavaScript -->
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="game-selector">Game</label>
+                    <select id="game-selector" name="game-selector" required>
+                        <option value="">Select game...</option>
+                        <!-- Options will be filled by JavaScript -->
+                    </select>
+                    <p class="input-help">The game must be in progress or have ended within the last 30 minutes.</p>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-danger">Submit Substitution Request</button>
+                </div>
+            </form>
+            
+            <div class="injury-rules">
+                <h3>Injury Substitution Rules</h3>
+                <ul>
+                    <li>Substitutions are only allowed if a player gets injured during a game.</li>
+                    <li>The injured player must be in your starting lineup.</li>
+                    <li>The substitute player must be on your bench.</li>
+                    <li>Substitution requests must be submitted during the game or within 30 minutes after it ends.</li>
+                    <li>Substitutions are processed immediately and are not reversible.</li>
+                    <li>Commissioners may review and approve/deny all substitution requests.</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="main-footer">
+        <nav class="main-nav">
+            <a href="../index.html" class="nav-item"><span>Home</span></a>
+            <a href="draft-board.html" class="nav-item"><span>Draft</span></a>
+            <a href="standings.html" class="nav-item"><span>Standings</span></a>
+            <a href="franchise.html" class="nav-item"><span>Franchise</span></a>
+            <a href="season.html" class="nav-item"><span>Season</span></a>
+            <a href="game-search.html" class="nav-item"><span>Games</span></a>
+            <a href="player-search.html" class="nav-item"><span>Players</span></a>
+            <a href="nfl-game-search.html" class="nav-item"><span>NFL Games</span></a>
+            <a href="advanced-analytics.html" class="nav-item"><span>Analytics</span></a>
+            <a href="recordbook.html" class="nav-item"><span>Records</span></a>
+        </nav>
+    </footer>
+    
+    <script src="../js/injury-sub.js"></script>
+</body>
+</html>

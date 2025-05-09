@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>League Players - Fantasy Football League</title>
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="background-container">
+        <div class="tiled-background"></div>
+        <div class="overlay"></div>
+    </div>
+    
+    <header class="main-header">
+        <div class="navigation-top">
+            <div class="header-left">
+                <a href="javascript:history.back()" class="back-button">
+                    <i class="fas fa-arrow-left"></i> Back
+                </a>
+                <h1 class="page-title">LEAGUE PLAYERS</h1>
+            </div>
+            <div class="league-title">THE SOCK TAN COLLECTIVE FFL</div>
+            <div class="user-status">
+                <!-- User status will be populated by JavaScript -->
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <div class="league-players-container">
+            <div class="league-info">
+                <h2 id="league-name">Loading league...</h2>
+                <div class="league-actions">
+                    <a href="#" id="league-homepage" class="btn btn-secondary">
+                        <i class="fas fa-home"></i> League Homepage
+                    </a>
+                </div>
+            </div>
+            
+            <div class="player-filters">
+                <div class="filter-group">
+                    <label for="player-status">Status:</label>
+                    <select id="player-status" name="player-status">
+                        <option value="all">All Players</option>
+                        <option value="available">Available Players</option>
+                        <option value="rostered">Rostered Players</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="position-filter">Position:</label>
+                    <select id="position-filter" name="position-filter">
+                        <option value="all">All Positions</option>
+                        <option value="QB">QB</option>
+                        <option value="RB">RB</option>
+                        <option value="WR">WR</option>
+                        <option value="TE">TE</option>
+                        <option value="K">K</option>
+                        <option value="DEF">DEF</option>
+                    </select>
+                </div>
+                
+                <div class="search-group">
+                    <input type="text" id="player-search" placeholder="Search players...">
+                    <button id="search-button" class="btn btn-primary">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                </div>
+            </div>
+            
+            <div class="players-table-container">
+                <table class="players-table">
+                    <thead>
+                        <tr>
+                            <th>Player</th>
+                            <th>Team</th>
+                            <th>Pos</th>
+                            <th>Status</th>
+                            <th>Fantasy Team</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="players-tbody">
+                        <tr>
+                            <td colspan="6" class="loading-row">Loading players...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="pagination">
+                <button id="prev-page" class="btn btn-secondary">
+                    <i class="fas fa-chevron-left"></i> Previous
+                </button>
+                <span id="page-info">Page 1 of 1</span>
+                <button id="next-page" class="btn btn-secondary">
+                    Next <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Add Player Modal -->
+        <div id="add-player-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Add Player to Your Team</h2>
+                    <span class="close">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <p>You are about to add <strong id="add-player-name"></strong> to your team.</p>
+                    <div class="form-group">
+                        <label for="selected-team">Select Team:</label>
+                        <select id="selected-team" name="selected-team">
+                            <!-- Options will be populated by JavaScript -->
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button id="cancel-add" class="btn btn-secondary">Cancel</button>
+                        <button id="confirm-add" class="btn btn-primary">Add Player</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="main-footer">
+        <nav class="main-nav">
+            <a href="../index.html" class="nav-item"><span>Home</span></a>
+            <a href="draft-board.html" class="nav-item"><span>Draft</span></a>
+            <a href="standings.html" class="nav-item"><span>Standings</span></a>
+            <a href="franchise.html" class="nav-item"><span>Franchise</span></a>
+            <a href="season.html" class="nav-item"><span>Season</span></a>
+            <a href="game-search.html" class="nav-item"><span>Games</span></a>
+            <a href="player-search.html" class="nav-item"><span>Players</span></a>
+            <a href="nfl-game-search.html" class="nav-item"><span>NFL Games</span></a>
+            <a href="advanced-analytics.html" class="nav-item"><span>Analytics</span></a>
+            <a href="recordbook.html" class="nav-item"><span>Records</span></a>
+        </nav>
+    </footer>
+    
+    <script src="../js/league-players.js"></script>
+</body>
+</html>
