@@ -1,0 +1,343 @@
+/* Standings Page Styles */
+
+/* Set up root variables to match the site's style */
+:root {
+    --glass-bg: rgba(28, 28, 30, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --accent-color: #dc3545;
+    --text-light: #ffffff;
+    --text-dim: #aaaaaa;
+    --positive: #10b981; /* Green for positive values */
+    --negative: #ef4444; /* Red for negative values */
+    --neutral: #6b7280; /* Gray for neutral values */
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* Standings container */
+.standings-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Filter controls */
+.filter-controls {
+    background: var(--glass-bg);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 25px;
+    display: flex;
+    gap: 25px;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow);
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.filter-group label {
+    font-weight: 600;
+    color: var(--text-light);
+    white-space: nowrap;
+}
+
+/* Updated select styling to match site style with black background */
+.filter-group select {
+    padding: 8px 12px;
+    background: rgba(0, 0, 0, 0.3);
+    color: var(--text-light);
+    border: 1px solid var(--glass-border);
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    min-width: 150px;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.5rem center;
+    background-size: 1em;
+}
+
+/* Dropdown option styling for consistent dark theme */
+.filter-group select option {
+    background-color: #1c1c1e;
+    color: var(--text-light);
+    padding: 8px 12px;
+}
+
+/* Hover state for select */
+.filter-group select:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.filter-group select:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.5);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.filter-group select:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Ensure dropdown arrow remains visible on all browsers */
+.filter-group select::-ms-expand {
+    display: none;
+}
+
+/* Section title */
+.standings-container h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--text-light);
+    text-align: center;
+}
+
+/* Division sections */
+.division-section {
+    background: var(--glass-bg);
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 30px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow);
+}
+
+.division-section h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: var(--accent-color);
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+/* Standings table */
+.standings-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: var(--text-light);
+}
+
+.standings-table th {
+    text-align: center;
+    padding: 12px 8px;
+    font-weight: 600;
+    background: rgba(0, 0, 0, 0.2);
+    color: var(--text-dim);
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid var(--glass-border);
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.15s ease;
+}
+
+.standings-table th:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.standings-table th[data-sort]::after {
+    content: '⇵';
+    margin-left: 5px;
+    opacity: 0.5;
+}
+
+.standings-table tbody tr {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: background-color 0.15s ease;
+}
+
+.standings-table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.standings-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.standings-table td {
+    padding: 12px 8px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Table column styles */
+.standings-table .rank {
+    width: 40px;
+    font-weight: 700;
+}
+
+.standings-table .team-name {
+    text-align: center !important;
+    width: 20%;
+}
+
+.standings-table .team-name a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: 500;
+    display: block;
+    text-align: center;
+    transition: color 0.15s ease;
+}
+
+.standings-table .team-name a:hover {
+    color: var(--accent-color);
+}
+
+.standings-table .record-cell {
+    width: 80px;
+}
+
+.standings-table .record {
+    font-weight: 700;
+}
+
+.standings-table .win-pct {
+    width: 60px;
+}
+
+.standings-table .points-total,
+.standings-table .points-for,
+.standings-table .points-against {
+    width: 80px;
+}
+
+.standings-table .point-diff {
+    width: 80px;
+}
+
+.standings-table .point-diff.positive {
+    color: var(--positive);
+    font-weight: 600;
+}
+
+.standings-table .point-diff.negative {
+    color: var(--negative);
+    font-weight: 600;
+}
+
+.standings-table .streak {
+    width: 70px;
+}
+
+/* Empty message */
+.empty-message {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    padding: 15px;
+    text-align: center;
+    color: var(--text-dim);
+    font-style: italic;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Loading container */
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    color: var(--text-dim);
+}
+
+.loading-spinner {
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    border-top: 4px solid var(--accent-color);
+    width: 40px;
+    height: 40px;
+    margin-bottom: 15px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Error message */
+.error-message {
+    background: rgba(220, 53, 69, 0.1);
+    color: var(--negative);
+    border: 1px solid rgba(220, 53, 69, 0.3);
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .standings-table {
+        font-size: 0.9rem;
+    }
+    
+    .standings-table th, 
+    .standings-table td {
+        padding: 10px 5px;
+    }
+}
+
+@media (max-width: 768px) {
+    .filter-controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+    
+    .filter-group {
+        justify-content: space-between;
+    }
+    
+    .standings-table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+@media (max-width: 480px) {
+    .division-section {
+        padding: 15px;
+    }
+    
+    .standings-table th,
+    .standings-table td {
+        padding: 8px 4px;
+        font-size: 0.8rem;
+    }
+    
+    .standings-container h2 {
+        font-size: 1.4rem;
+    }
+    
+    .division-section h3 {
+        font-size: 1.2rem;
+    }
+}
