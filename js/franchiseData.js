@@ -329,8 +329,8 @@ const FranchiseData = (function() {
                 // Update player stats
                 playerStats[playerId].weeksOnRoster++;
                 
-                // Check if player was started (not on bench)
-                if (player.slotPosition !== 'BE') {
+                // Check if player was started (not on bench or IR)
+                if (player.slotPosition !== 'BE' && player.slotPosition !== 'IR') {
                     playerStats[playerId].weeksStarted++;
                 }
                 

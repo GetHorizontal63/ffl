@@ -4,11 +4,11 @@
 :root {
     --glass-bg: rgba(28, 28, 30, 0.7);
     --glass-border: rgba(255, 255, 255, 0.1);
-    --accent-color: #dc3545;
-    --text-light: #ffffff;
-    --text-dim: #aaaaaa;
-    --positive: #10b981; /* Green for positive values */
-    --negative: #ef4444; /* Red for negative values */
+    --accent-color: #F6BE36;
+    --text-light: #F2F2F2;
+    --text-dim: #b0c4b5;
+    --positive: #3B7A57; /* Changed to Turf Green for positive values */
+    --negative: #dc3545; /* Keeping red for negative values */
     --neutral: #6b7280; /* Gray for neutral values */
     --shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }

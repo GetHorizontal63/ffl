@@ -39,10 +39,10 @@
 }
 
 .category-tab.active {
-    background: var(--accent-color);
+    background: var(--primary-color); /* Changed to Turf Green */
     color: white;
-    border-color: var(--accent-color);
-    box-shadow: 0 0 15px rgba(var(--accent-color-rgb), 0.3);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 15px rgba(59, 122, 87, 0.3); /* Turf Green shadow */
 }
 
 /* Category panels */
@@ -59,7 +59,7 @@
     font-size: 1.1rem;
     font-weight: 600;
     margin-bottom: 15px;
-    color: var(--accent-color);
+    color: var(--primary-color); /* Changed to Turf Green */
     text-align: center;
 }
 
@@ -162,7 +162,7 @@
 }
 
 .game-team.winner::before {
-    background: #2ecc71; /* Green vertical bar for winners */
+    background: var(--positive); /* Changed to Turf Green */
 }
 
 /* Update winner indicator styles to match weekly results */
@@ -170,16 +170,16 @@
     transform: translateY(0px);
     box-shadow: 0 0 5px 0px rgba(255, 255, 255, 0.4);
     animation: glowPulse .71s infinite alternate;
-    background-color: rgba(46, 204, 113, 0.05);
+    background-color: rgba(59, 122, 87, 0.05); /* Turf Green with low opacity */
 }
 
 /* Add a pulsing animation for the glow effect */
 @keyframes glowPulse {
     from {
-        box-shadow: 0 0 10px 5px rgba(46, 204, 113, 0.2);
+        box-shadow: 0 0 10px 5px rgba(59, 122, 87, 0.2); /* Turf Green glow */
     }
     to {
-        box-shadow: 0 0 20px 10px rgba(46, 204, 113, 0.5);
+        box-shadow: 0 0 20px 10px rgba(59, 122, 87, 0.5); /* Turf Green glow intensified */
     }
 }
 
@@ -253,7 +253,7 @@
 
 /* Green score for winners only */
 .game-team.winner .team-score {
-    color: #2ecc71;
+    color: var(--positive); /* Changed to Turf Green */
 }
 
 /* Remove score bar styles */

@@ -9,6 +9,40 @@
  */
 
 const DataService = (function() {
+    // Split large data into chunks for better loading
+    const DATA_CONFIG = {
+        // Core data (small files) - keep in main repo
+        core: {
+            baseUrl: 'https://raw.githubusercontent.com/GetHorizontal63/ffl_assets/main/data/',
+            files: {
+                teamAbbreviations: 'team_abbreviations.json',
+                leagueConfig: 'league_config.json'
+            }
+        },
+        
+        // Large data (chunked) - separate repository or hosting
+        chunks: {
+            baseUrl: 'https://raw.githubusercontent.com/GetHorizontal63/ffl_data/main/',
+            files: {
+                leagueScores: (year) => `league_scores_${year}.json`, // Split by year
+                seasonData: (year) => `season/${year}/season_data.json`,
+                rosterData: (year, chunk) => `rosters/${year}/chunk_${chunk}.json` // Split large rosters
+            }
+        }
+    };
+    
+    // Lazy loading for large datasets
+    async function fetchLargeDataset(dataType, params = []) {
+        // Only load data when specifically requested
+        // Implement pagination/chunking for very large files
+        
+        console.log(`Loading large dataset: ${dataType}`);
+        // Show loading indicator for large data
+        
+        const chunks = await fetchDataChunks(dataType, params);
+        return mergechunks(chunks);
+    }
+    
     // Private variables
     let _leagueData = null;
     let _divisionData = null;  // Add variable for division data
@@ -28,6 +62,11 @@ const DataService = (function() {
         storageKey: 'rchosffl_data',
         divisionsStorageKey: 'rchosffl_divisions'  // Add storage key for divisions
     };
+    
+    // Cache for loaded data with size limits
+    const dataCache = new Map();
+    const MAX_CACHE_SIZE = 100 * 1024 * 1024; // 100MB cache limit
+    let currentCacheSize = 0;
     
     // Store data in localStorage
     const _storeData = function() {
@@ -1010,56 +1049,67 @@ const DataService = (function() {
         },
         
         // Utility: Sort teams by various criteria
-        sortTeams: function(teams, sortBy, direction = 'desc') {
+        sortTeams: function(teams, sortBy, direction = 'desc') { the largest Game ID
             const sortFunctions = {
-                name: (a, b) => a.team.localeCompare(b.team),
-                wins: (a, b) => b.wins - a.wins,
+                name: (a, b) => a.team.localeCompare(b.team),oaded || !_leagueData || !_leagueData.league_data) {
+                wins: (a, b) => b.wins - a.wins,null;
                 losses: (a, b) => b.losses - a.losses,
                 winPct: (a, b) => b.winPct - a.winPct,
-                pointsFor: (a, b) => b.pointsFor - a.pointsFor,
-                pointsAgainst: (a, b) => b.pointsAgainst - a.pointsAgainst,
-                pointDiff: (a, b) => (b.pointsFor - b.pointsAgainst) - (a.pointsFor - a.pointsAgainst)
+                pointsFor: (a, b) => b.pointsFor - a.pointsFor,let maxGameId = 0;
+                pointsAgainst: (a, b) => b.pointsAgainst - a.pointsAgainst,RecentWeek = null;
+                pointDiff: (a, b) => (b.pointsFor - b.pointsAgainst) - (a.pointsFor - a.pointsAgainst)ll;
             };
-            
-            const sortFunction = sortFunctions[sortBy] || sortFunctions.winPct;
-            let sorted = [...teams].sort(sortFunction);
-            
-            // Reverse if ascending order requested
-            if (direction === 'asc') {
-                sorted.reverse();
+             Iterate through all seasons and weeks to find the largest Game ID
+            const sortFunction = sortFunctions[sortBy] || sortFunctions.winPct;   _leagueData.league_data.seasons.forEach(season => {
+            let sorted = [...teams].sort(sortFunction);          season.weeks.forEach(week => {
+                            week.games.forEach(game => {
+            // Reverse if ascending order requested      const gameId = parseInt(game.game_id);
+            if (direction === 'asc') {                   if (gameId > maxGameId) {
+                sorted.reverse();                            maxGameId = gameId;
             }
-            
+            season;
             return sorted;
-        },
+        },                   });
+                            maxGameId = gameId;                });
 
-        // Find most recent week based on the game with the largest Game ID
-        getMostRecentWeekBasedOnGameId: function() {
-            if (!_isDataLoaded || !_leagueData || !_leagueData.league_data) {
-                return null;
-            }
-            
-            let maxGameId = 0;
-            let mostRecentWeek = null;
-            let mostRecentSeason = null;
-            
-            // Iterate through all seasons and weeks to find the largest Game ID
-            _leagueData.league_data.seasons.forEach(season => {
-                season.weeks.forEach(week => {
-                    week.games.forEach(game => {
-                        const gameId = parseInt(game.game_id);
-                        if (gameId > maxGameId) {
-                            maxGameId = gameId;
-                            mostRecentWeek = week.week;
-                            mostRecentSeason = season.season;
-                        }
-                    });
-                });
-            });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}    module.exports = DataService;if (typeof module !== 'undefined' && module.exports) {// Export the DataService module for use in Node.js environments})();    return module;        };        }            };                season: mostRecentSeason                week: mostRecentWeek,            return {                        });                });                    });                        }                            mostRecentSeason = season.season;                            mostRecentWeek = week.week;            });
             
             return {
                 week: mostRecentWeek,
                 season: mostRecentSeason
             };
+        },
+        
+        // GitHub LFS data fetching
+        init: () => Promise.resolve(), // No initialization needed for GitHub LFS
+        fetchLeagueScores: () => fetchData('leagueScores'),
+        fetchTeamAbbreviations: () => fetchData('teamAbbreviations'),
+        fetchSeasonData: (year) => fetchData('seasonData', [year]),
+        fetchRosterData: (year, week) => fetchData('rosterData', [year, week]),
+        clearCache: () => {
+            dataCache.clear();
+            currentCacheSize = 0;
         }
     };
     

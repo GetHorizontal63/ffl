@@ -1,10 +1,10 @@
 :root {
     --glass-bg: rgba(28, 28, 30, 0.7);
     --glass-border: rgba(255, 255, 255, 0.1);
-    --accent-color: #dc3545;
-    --accent-color-rgb: 255, 102, 0;
-    --text-light: #ffffff;
-    --text-dim: #aaaaaa;
+    --accent-color: #F6BE36; /* Changed to Sideline Gold */
+    --accent-color-rgb: 246, 190, 54; /* Sideline Gold RGB values */
+    --text-light: #F2F2F2; /* Changed to Chalk White */
+    --text-dim: #b0c4b5; /* Lighter variant of Turf Green */
 }
 
 body {
@@ -50,7 +50,7 @@ body {
 }
 
 .back-link:hover {
-    color: #ffffff;
+    color: var(--accent-color); /* Changed to Sideline Gold */
     transform: translateX(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
@@ -390,10 +390,10 @@ main {
 }
 
 .tab.active {
-    background: var(--accent-color);
+    background: var(--primary-color); /* Changed to Turf Green */
     color: white;
-    border-color: var(--accent-color);
-    box-shadow: 0 0 15px rgba(var(--accent-color-rgb), 0.3);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 15px rgba(59, 122, 87, 0.3); /* Turf Green shadow */
 }
 
 .tab-content {
@@ -414,7 +414,7 @@ main {
 .season-section h3 {
     font-size: 18px;
     margin: 20px 0 12px;
-    color: var(--accent-color);
+    color: var(--primary-color); /* Changed to Turf Green */
 }
 
 .games-table {
@@ -453,9 +453,9 @@ main {
 
 /* Error message styling */
 .error-message {
-    background: rgba(255, 102, 0, 0.15); /* Changed from rgba(255, 69, 0, 0.15) */
-    color: #ff6600; /* Changed from #ff4500 */
-    border: 1px solid rgba(255, 102, 0, 0.5); /* Changed from rgba(255, 69, 0, 0.5) */
+    background: rgba(59, 122, 87, 0.15); /* Changed to Turf Green background */
+    color: var(--primary-color); /* Changed to Turf Green */
+    border: 1px solid rgba(59, 122, 87, 0.5); /* Changed to Turf Green border */
     padding: 16px;
     border-radius: 8px;
     margin: 20px 0;
@@ -680,7 +680,7 @@ main {
     font-size: 18px;
     font-weight: 600;
     margin-bottom: 10px;
-    color: var(--accent-color);
+    color: var(--primary-color); /* Changed to Turf Green */
 }
 
 .calculation-steps {
@@ -750,7 +750,7 @@ main {
 }
 
 .info-button:hover {
-    background-color: var(--accent-color);
+    background-color: var(--primary-color); /* Changed to Turf Green */
     color: white;
     transform: scale(1.1);
 }

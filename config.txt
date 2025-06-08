@@ -1,0 +1,211 @@
+# FFLSite Configuration File
+# Generated: December 2024
+# Purpose: Document project structure and asset management
+
+## PROJECT OVERVIEW
+Project Name: Fantasy Football League Website
+Project Root: d:\Data Projects\Sample Projects\FFLSite\
+Description: A comprehensive fantasy football league management website with player stats, game tracking, and league administration features.
+
+## ASSET RELOCATION NOTICE
+IMPORTANT: Assets have been relocated to external repository
+Original Location: ./assets/
+New Location: https://github.com/GetHorizontal63/ffl_assets/tree/main/assets
+Migration Date: December 2024
+Reason: Centralized asset management and CDN distribution
+
+### Asset Categories:
+- Team Logos: /team-logos/
+- FFL Logos: /ffl-logos/
+- Player Images: /players/
+- Background Images: /grass-touchers/
+- Icons: /icons/
+- Default Images: /defaults/
+
+### Implementation Notes:
+- All asset references in HTML/CSS/JS should point to GitHub raw URLs
+- Base URL: https://raw.githubusercontent.com/GetHorizontal63/ffl_assets/main/assets/
+- Example: ../assets/team-logos/team.png becomes https://raw.githubusercontent.com/GetHorizontal63/ffl_assets/main/assets/team-logos/team.png
+
+## DATA RELOCATION NOTICE
+IMPORTANT: Data files have been relocated to Google Drive
+Original Location: ./data/
+New Location: https://drive.google.com/drive/folders/1w2iG3v3NbDnOaKYlT8MyeoLpwGpAOOeK?usp=sharing
+Migration Date: December 2024
+Reason: Centralized data management and easier sharing/collaboration
+
+### Data Access Information:
+- Google Drive Folder ID: 1w2iG3v3NbDnOaKYlT8MyeoLpwGpAOOeK
+- Folder Name: FFLSite Data
+- Access Level: Anyone with the link can view
+- Contains: All JSON data files previously stored in ./data/ directory
+
+### Data Files Structure (Google Drive):
+- league_score_data.json           # Main game scoring data
+- team_abbreviations.json          # Team name and abbreviation mappings
+- /rosters/{year}/                 # Season roster data by year
+- /season/{year}/                  # Season-specific data files
+- /recordbook/                     # Historical records and achievements
+
+## DATA HOSTING RECOMMENDATION FOR 5GB DATASET
+
+### CURRENT ISSUE:
+- Data files total 5GB - too large for Google Drive direct access
+- Need high-performance solution for large JSON files
+- Require reliable CDN distribution
+
+### RECOMMENDED SOLUTION: GitHub LFS + Raw Access
+- Host: GitHub repository with Large File Storage (LFS)
+- Access: Direct raw file URLs through GitHub's CDN
+- Benefits:
+  - Free up to 1GB LFS, $5/month for 50GB
+  - Global CDN distribution
+  - Version control for data files
+  - Automatic compression and caching
+
+### SETUP INSTRUCTIONS:
+1. Create new repository: GetHorizontal63/ffl_data
+2. Initialize with Git LFS: `git lfs track "*.json"`
+3. Upload data files (LFS will automatically handle large files)
+4. Access via: https://github.com/GetHorizontal63/ffl_data/raw/main/filename.json
+
+### ALTERNATIVE SOLUTIONS:
+1. **AWS S3 + CloudFront** ($5-10/month)
+   - Best performance for large files
+   - Global edge locations
+   - Automatic compression
+
+2. **Netlify Large Media** ($19/month)
+   - Git LFS integration
+   - Image transformations
+   - Built-in CDN
+
+3. **Split Data Strategy**
+   - Keep essential data in main repo
+   - Host large historical data separately
+   - Load on-demand basis
+
+### IMPLEMENTATION STRATEGY:
+- Use progressive loading for large datasets
+- Implement client-side caching with size limits
+- Consider data pagination for very large files
+- Use compression (gzip) for JSON transport
+
+## FILE STRUCTURE
+
+### Root Directory (/)
+├── index.html                    # Main landing page
+├── config.txt                    # This configuration file
+├── README.md                     # Project documentation
+
+### Pages Directory (/pages/)
+├── advanced-analytics.html       # Advanced statistical analysis
+├── coming-soon.html              # Placeholder for future features
+├── create-league.html            # League creation interface
+├── franchise.html                # Team franchise details
+├── game-details.html             # Individual game information
+├── game-search.html              # Game search and filtering
+├── injury-sub.html               # Injury substitution management
+├── league-players.html           # League player roster
+├── lineup.html                   # Team lineup management
+├── login.html                    # User authentication
+├── my-teams.html                 # User's team overview
+├── nfl-game-details.html         # NFL game information
+├── nfl-game-search.html          # NFL game search
+├── player-details.html           # Individual player stats
+├── player-search.html            # Player search and filtering
+├── recordbook.html               # League records and achievements
+├── register.html                 # User registration
+├── season.html                   # Season overview and statistics
+└── standings.html                # League standings
+
+### CSS Directory (/css/)
+├── styles.css                    # Main stylesheet (global styles)
+├── weeklyResults.css             # Weekly results specific styles
+├── advanced-analytics.css        # Analytics page styles
+├── allProTeam.css               # All-Pro team styles
+├── bracketView.css              # Tournament bracket styles
+├── device-detection.css         # Device-specific styles
+├── franchise.css                # Franchise page styles
+├── game-details.css             # Game details styles
+├── game-search.css              # Game search styles
+├── leagueLeaders.css            # League leaders styles
+├── nfl-game-details.css         # NFL game details styles
+├── nfl-game-search.css          # NFL game search styles
+├── nflteams.css                 # NFL teams styles
+├── notableGames.css             # Notable games styles
+├── player-details.css           # Player details styles
+├── player-details-season-stats.css # Player season stats styles
+├── player-search.css            # Player search styles
+├── recordbook.css               # Record book styles
+├── season.css                   # Season page styles
+└── standings.css                # Standings page styles
+
+### JavaScript Directory (/js/)
+├── main.js                      # Main application controller
+├── utils.js                     # Utility functions and helpers
+├── auth.js                      # Authentication management
+├── dataService.js               # Data fetching and management
+├── advanced-analytics.js        # Analytics functionality
+├── allProTeam.js                # All-Pro team logic
+├── bracketView.js               # Tournament bracket display
+├── device-detection.js          # Device detection utilities
+├── franchise.js                 # Franchise page controller
+├── franchiseCharts.js           # Franchise chart generation
+├── franchiseData.js             # Franchise data processing
+├── franchiseGameLog.js          # Franchise game log management
+├── franchiseOverview.js         # Franchise overview display
+├── franchiseRoster.js           # Franchise roster management
+├── game-details.js              # Game details controller
+├── game-search.js               # Game search functionality
+├── injury-sub.js                # Injury substitution logic
+├── leageLeaders.js              # League leaders processing
+├── league-creation.js           # League creation workflow
+├── league-players.js            # League player management
+├── league.js                    # General league functionality
+├── lineup.js                    # Lineup management
+├── nfl-game-details.js          # NFL game details
+├── nfl-game-search.js           # NFL game search
+├── nflteams.js                  # NFL teams data
+├── notableGames.js              # Notable games processing
+├── player-details.js            # Player details controller
+├── player-search.js             # Player search functionality
+├── recordbook.js                # Record book data processing
+├── season.js                    # Season overview controller
+├── standings.js                 # Standings calculation and display
+├── teams.js                     # Team management
+└── weeklyResults.js             # Weekly results processing
+
+### Data Directory (NOW EXTERNAL - Google Drive)
+Note: Data files are now hosted on Google Drive at:
+https://drive.google.com/drive/folders/1w2iG3v3NbDnOaKYlT8MyeoLpwGpAOOeK
+
+## TECHNOLOGY STACK
+- Frontend: HTML5, CSS3, JavaScript (ES6+)
+- Styling: CSS Grid, Flexbox, CSS Variables
+- Architecture: Modular JavaScript with revealing module pattern
+- Data Format: JSON
+- Asset Hosting: GitHub Pages (external repository)
+- Data Hosting: Google Drive (shared folder)
+
+## DEVELOPMENT NOTES
+- All pages use responsive design principles
+- Dark theme with turf green accent colors
+- Mobile-first approach for CSS media queries
+- Modular JavaScript architecture for maintainability
+- External asset hosting for performance and scalability
+- External data hosting for easy collaboration and updates
+
+## MAINTENANCE
+- Assets are maintained in separate repository: GetHorizontal63/ffl_assets
+- Data files are maintained in Google Drive folder: 1w2iG3v3NbDnOaKYlT8MyeoLpwGpAOOeK
+- Code is self-contained in this repository
+- Data files should be updated seasonally in Google Drive
+- Configuration changes should be documented in this file
+
+## BROWSER SUPPORT
+- Modern browsers with ES6+ support
+- Chrome 60+, Firefox 55+, Safari 12+, Edge 79+
+- Mobile browsers on iOS 12+ and Android 7+
+
+Last Updated: December 2024
